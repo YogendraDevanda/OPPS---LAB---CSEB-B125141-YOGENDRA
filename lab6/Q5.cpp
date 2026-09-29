@@ -1,28 +1,43 @@
 #include <iostream>
 using namespace std;
 
-void updateVisitors(int *count)
-{
-    int newVisitors;
+class Time {
+private:
+    int hours;
+    int minutes;
 
-    cout << "Enter newly arrived visitors: ";
-    cin >> newVisitors;
+public:
+    Time(int h = 0, int m = 0) {
+        hours = h;
+        minutes = m;
+    }
 
-    *count = *count + newVisitors;
-}
+    Time operator+(const Time& t) const {
+        Time temp;
+        temp.minutes = minutes + t.minutes;
+        temp.hours = hours + t.hours + (temp.minutes / 60);
+        temp.minutes = temp.minutes % 60;
+        return temp;
+    }
+    void display() const {
+        cout << hours << " hours " << minutes << " minutes" << endl;
+    }
+};
 
-int main()
-{
-    int visitors;
+int main() {
+    Time t1(4, 45);
+    Time t2(2, 30);
 
-    cout << "Enter current visitor count: ";
-    cin >> visitors;
+    Time t3 = t1 + t2; 
 
-    cout << "Before update: " << visitors << endl;
+    cout << "Time 1: ";
+    t1.display();
 
-    updateVisitors(&visitors);
+    cout << "Time 2: ";
+    t2.display();
 
-    cout << "After update: " << visitors << endl;
+    cout << "Result: ";
+    t3.display();
 
     return 0;
 }

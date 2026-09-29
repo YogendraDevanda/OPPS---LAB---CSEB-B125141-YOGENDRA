@@ -1,29 +1,31 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-int main(){
-    int seat[8] = {23 , 24 , 34 , 56 , 12 , 10 , 43 , 78};
-    int *p = seat;
-    cout<<"seat numbers before updating :";
-    for(int i=0;i<8;i++){
-         cout<< *(p +i)<<" ";
+
+class Number {
+private:
+    int value;
+
+public:
+    Number(int v = 0) {
+        value = v;
     }
-    cout<<endl;
-    int j,s;
-    cout<<"enter a new seat number at position : ";
-    cin>>j;
-    if (j < 0 || j >= 8)
-    {
-        cout << "Position not found";
-        return 0;
+    Number operator-() const {
+        return Number(-value);
     }
-    cout<<endl;
-    cout<<"enter value to uadate at poation j : ";
-    cin>>s;
-    
-    *(p+j) = s;
-    cout<<"uapdated seat number : ";
-    for(int i=0;i<8;i++){
-        cout<<*(p+i)<<" ";
+    void display() const {
+        cout << value << endl;
     }
+};
+
+int main() {
+    Number n1 = 25;
+    Number n2 = -n1; 
+
+    cout << "n1 = ";
+    n1.display();
+
+    cout << "n2 = ";
+    n2.display();
+
     return 0;
 }

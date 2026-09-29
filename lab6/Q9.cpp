@@ -1,43 +1,45 @@
 #include <iostream>
+
 using namespace std;
 
-int main()
-{
-    int n;
+class Temperature {
+private:
+    double celsius;
 
-    cout << "Enter number of parking slots: ";
-    cin >> n;
-    int *arr = new int[n];
-
-    cout << "Enter slot status (0 = Available, 1 = Occupied): ";
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> *(arr + i);
+public:
+    Temperature(double c = 0.0) {
+        celsius = c;
+    }
+    bool operator<(const Temperature& other) const {
+        return celsius < other.celsius;
     }
 
-    int available = 0;
-    int occupied = 0;
-
-    int *p = arr;
-    for (int i = 0; i < n; i++)
-    {
-        if (*p == 0)
-        {
-            available++;
-        }
-        else if (*p == 1)
-        {
-            occupied++;
-        }
-
-        p++;
+    bool operator>(const Temperature& other) const {
+        return celsius > other.celsius;
     }
 
-    cout << "Available slots = " << available << endl;
-    cout << "Occupied slots = " << occupied << endl;
+    void display() const {
+        cout << celsius << "°C";
+    }
+};
 
-    delete[] arr;
+int main() {
+    Temperature temp1(25.5);
+    Temperature temp2(30.0);
+
+    cout << "Temperature 1: ";
+    temp1.display();
+    cout << "\nTemperature 2: ";
+    temp2.display();
+    cout << "\n\nComparison Result:\n";
+
+    if (temp1 < temp2) {
+        cout << "Temperature 1 is lower than Temperature 2." << endl;
+    } else if (temp1 > temp2) {
+        cout << "Temperature 1 is higher than Temperature 2." << endl;
+    } else {
+        cout << "Temperature 1 is equal to Temperature 2." << endl;
+    }
 
     return 0;
 }

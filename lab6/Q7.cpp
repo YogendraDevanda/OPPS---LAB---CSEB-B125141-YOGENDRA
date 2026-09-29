@@ -1,36 +1,47 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-    char message[100] = "YOGENDRA devan DA";
-    char *p = message;
+class Date {
+private:
+    int day;
+    int month;
+    int year;
 
-    int uppercase = 0;
-    int lowercase = 0;
-    int spaces = 0;
-
-    while (*p != '\0')
-    {
-        if (*p >= 'A' && *p <= 'Z')
-        {
-            uppercase++;
-        }
-        else if (*p >= 'a' && *p <= 'z')
-        {
-            lowercase++;
-        }
-        else if (*p == ' ')
-        {
-            spaces++;
-        }
-
-        p++;
+public:
+    
+    Date(int d = 1, int m = 1, int y = 2000) {
+        day = d;
+        month = m;
+        year = y;
     }
 
-    cout << "Number of uppercase : " << uppercase << endl;
-    cout << "Number of lowercase : " << lowercase << endl;
-    cout << "Number of spaces : " << spaces << endl;
+    
+    bool operator==(const Date& other) const {
+        return (day == other.day && month == other.month && year == other.year);
+    }
+
+    
+    void display() const {
+        cout << day << " " << month << " " << year <<endl;
+    }
+};
+
+int main() {
+    Date date1(15, 8, 2026);
+    Date date2(15, 8, 2026);
+    Date date3(20, 8, 2026);
+
+    cout << "Date 1: ";
+    date1.display();
+    cout << "Date 2: ";
+    date2.display();
+
+    
+    if (date1 == date2) {
+        cout << "Output: Both dates are equal." << endl;
+    } else {
+       cout << "Output: Dates are not equal." << endl;
+    }
 
     return 0;
 }

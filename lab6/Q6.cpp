@@ -1,28 +1,49 @@
 #include <iostream>
 using namespace std;
 
-float Highest(float *p, int n)
-{
-    float highest = *p;
-    for (int i = 1; i < n; i++)
-    {
-        p++;
-        if (*p > highest)
-            highest = *p;
-    }
-    return highest;
-}
-int main()
-{
-    float prices[7];
-    cout << "Enter prices of 7 products:\n";
-    for (int i = 0; i < 7; i++)
-    {
-        cin >> prices[i];
-    }
-    float highest = Highest(prices, 7);
+class Counter {
+private:
+    int value;
 
-    cout << "Highest price = " << highest << endl;
+public:
+    Counter(int v = 0) {
+        value = v;
+    }
+    Counter& operator++() {
+        ++value;         
+        return *this;    
+    }
+    Counter operator++(int) {
+        Counter temp = *this; 
+        value++;             
+        return temp;         
+    }
+    void display() const {
+        cout << value << endl;
+    }
+};
+
+int main() {
+    Counter c(10);
+
+    cout << "Initial value: ";
+    c.display();
+
+    cout << "Before ++c: ";
+    c.display();
+    
+    ++c; 
+    
+    cout << "After ++c:  ";
+    c.display();
+
+    cout << "Before c++: ";
+    c.display();
+    
+    c++; 
+    
+    cout << "After c++:  ";
+    c.display();
 
     return 0;
 }
